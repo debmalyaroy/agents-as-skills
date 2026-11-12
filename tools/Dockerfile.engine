@@ -1,0 +1,11 @@
+# Builds the static x86_64-musl engine binary. Used by tools/build_engine.sh.
+FROM rust:1.99.1-alpine
+RUN apk add --no-cache musl-dev gcc g++ make git
+# optional: --build-arg CARGO_BUILD_JOBS=4 limits the compiler to four cores
+ARG CARGO_BUILD_JOBS
+ENV CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS}
+WORKDIR /build
+COPY engine/Cargo.toml engine/Cargo.lock /build/
+COPY engine/src /build/src
+RUN RUSTFLAGS="-C target-feature=+crt-static -C link-arg=-s" \
+    cargo build --release --locked --target x86_64-unknown-linux-musl --bin swe-coder

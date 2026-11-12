@@ -1,0 +1,25 @@
+# Configuration of the agent. tools/generate.py renders the ADK submission package from this file.
+[meta]
+version = "v0.25"
+description = "Single agent with the swe-coder engine on Gemma 4 E4B: flat call shape, no submit tool"
+
+[budget]
+max_time_minutes = 8.0
+max_tool_calls = 28
+max_turns = 45
+command_timeout_seconds = 240
+
+[sampling]
+temperature = 0.1
+top_p = 0.95
+max_output_tokens = 8192
+thinking_budget = 4096
+include_thoughts = true
+presence_penalty = 0.3
+
+[agent]
+model = "gemma-4-e4b-it-qat-w4a16-ct"
+tools = ["run_command"]
+skills = ["swe-coder"]
+adapter = ""
+call_shape = "cmd"

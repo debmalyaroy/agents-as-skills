@@ -1,0 +1,32 @@
+[package]
+name = "swe-coder"
+description = "Native 'agents as skills' engine (/tmp/coder): debug, view, patch, verify and probe for a small-model coding agent"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+name = "swe_coder"
+path = "src/lib.rs"
+
+[[bin]]
+name = "swe-coder"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+walkdir = "2"
+tree-sitter = "0.25"
+tree-sitter-python = "0.25"
+rayon = "1"
+regex = "1"
+sha2 = "0.10"
+
+[dev-dependencies]
+tempfile = "3"
+
+# standalone crate: not part of a parent workspace
+[workspace]
